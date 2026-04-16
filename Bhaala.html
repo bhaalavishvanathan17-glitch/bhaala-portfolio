@@ -1,0 +1,135 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <!-- Session Guard: redirect to login if not authenticated -->
+    <script>
+        if (!sessionStorage.getItem('bhaala_logged_in')) {
+            window.location.replace('login.html');
+        }
+    </script>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Bhaala | Professional Portfolio</title>
+    <meta name="description" content="Bhaala Vishvanathan – AI & Data Science Enthusiast. Portfolio showcasing skills, education, and passion for technology.">
+    <link rel="stylesheet" href="Bhaala.css">
+</head>
+<body>
+
+    <!-- ═══════════════ NAVIGATION ═══════════════ -->
+    <nav class="navbar">
+        <a href="Bhaala.html" class="navbar-brand">BV</a>
+        <ul>
+            <li><a href="Bhaala.html" class="active">Home</a></li>
+            <li><a href="About Me.html">About Me</a></li>
+            <li><a href="school.html">School</a></li>
+            <li><a href="college.html">My College</a></li>
+            <li><a href="login.html" class="nav-login-btn">Login</a></li>
+        </ul>
+    </nav>
+
+    <!-- ═══════════════ HERO SECTION ═══════════════ -->
+    <section class="hero">
+        <div class="hero-text animate-fade-up">
+            <p class="hero-greeting">👋 Hello, I'm</p>
+            <h1>Bhaalavishvanathan</h1>
+            <h3>AI & Data Science Enthusiast</h3>
+            <p>
+                Passionate about technology, continuous growth, and building solutions
+                that matter. Currently pursuing B.Tech in AI & Data Science, driven by
+                curiosity and a never-give-up mindset.
+            </p>
+            <div class="hero-buttons">
+                <a href="college.html" class="btn-primary">My College</a>
+                <a href="#contact" class="btn-outline">Contact Me</a>
+            </div>
+        </div>
+
+        <div class="hero-img">
+            <img src="Images/Bhaala.jpeg" alt="Bhaala Vishvanathan">
+            <div class="hero-img-badge">
+                <span>Bhaala</span>
+                2nd Year · B.Tech
+            </div>
+        </div>
+    </section>
+
+    <hr>
+
+    <!-- ═══════════════ SKILLS SECTION ═══════════════ -->
+    <section class="skills-section" id="skills">
+        <div class="section-header">
+            <h2>Skills &amp; Interests</h2>
+            <p>Areas I'm passionate about and actively growing in</p>
+            <div class="divider"></div>
+        </div>
+
+        <div class="skills-grid">
+            <div class="skill-card">
+                <span class="skill-icon">🤖</span>
+                <h3>Artificial Intelligence</h3>
+                <p>Exploring ML concepts, model building, and AI-driven problem solving with a deep enthusiasm for the field.</p>
+            </div>
+            <div class="skill-card">
+                <span class="skill-icon">📊</span>
+                <h3>Data Science</h3>
+                <p>Analysing data, finding patterns, and turning raw numbers into meaningful, actionable insights.</p>
+            </div>
+            <div class="skill-card">
+                <span class="skill-icon">🌐</span>
+                <h3>Web Development</h3>
+                <p>Building clean, modern web interfaces using HTML, CSS, and JavaScript with a focus on user experience.</p>
+            </div>
+            <div class="skill-card">
+                <span class="skill-icon">🐍</span>
+                <h3>Python Programming</h3>
+                <p>Writing scripts, automating tasks, and working with data libraries like pandas and numpy.</p>
+            </div>
+            <div class="skill-card">
+                <span class="skill-icon">💡</span>
+                <h3>Problem Solving</h3>
+                <p>Tackling challenges with logical thinking, persistence, and a solution-first mindset.</p>
+            </div>
+            <div class="skill-card">
+                <span class="skill-icon">📈</span>
+                <h3>Continuous Learning</h3>
+                <p>Committed to growing every day — through courses, projects, reading, and real-world practice.</p>
+            </div>
+        </div>
+    </section>
+
+    <hr>
+
+    <!-- ═══════════════ CONTACT SECTION ═══════════════ -->
+    <section class="contact-section" id="contact">
+        <h2>Let's Connect</h2>
+        <p>Feel free to reach out — I'm always open to opportunities, collaboration, and conversation.</p>
+
+        <div class="contact-links">
+            <a href="mailto:bhaala@example.com" class="contact-link">
+                📧 Email Me
+            </a>
+            <a href="https://linkedin.com" target="_blank" class="contact-link">
+                💼 LinkedIn
+            </a>
+            <a href="https://github.com" target="_blank" class="contact-link">
+                🐙 GitHub
+            </a>
+            <a href="tel:+919361000742" target="_blank" class="contact-link">
+                📞 Call
+            </a>
+            <a href="https://wa.me/919361000742" target="_blank" class="contact-link">
+                💬 WhatsApp
+            </a>
+            <a href="https://www.instagram.com/_bhaala_/" target="_blank" class="contact-link">
+                📸 Instagram
+            </a>
+        </div>
+    </section>
+
+    <!-- ═══════════════ FOOTER ═══════════════ -->
+    <footer class="footer">
+        © 2026 <span>Bhaalavishvanathan</span> — Built with passion & purpose.
+    </footer>
+
+</body>
+</html>

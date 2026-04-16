@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <!-- Session Guard: redirect to login if not authenticated -->
+    <script>
+        if (!sessionStorage.getItem('bhaala_logged_in')) {
+            window.location.replace('login.html');
+        }
+    </script>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Bhaala | My College</title>
+    <meta name="description" content="Bhaala Vishvanathan's college journey at Dhanalakshmi Srinivasan Engineering College, pursuing B.Tech in AI & Data Science.">
+    <link rel="stylesheet" href="Bhaala.css">
+</head>
+<body>
+
+    <!-- ═══════════════ NAVIGATION ═══════════════ -->
+    <nav class="navbar">
+        <a href="Bhaala.html" class="navbar-brand">BV</a>
+        <ul>
+            <li><a href="Bhaala.html">Home</a></li>
+            <li><a href="About Me.html">About Me</a></li>
+            <li><a href="school.html">My School</a></li>
+            <li><a href="college.html">My College</a></li>
+            <li><a href="login.html" class="nav-login-btn">Login</a></li>
+        </ul>
+    </nav>
+    <!-- ═══════════════ COLLEGE HERO ═══════════════ -->
+    <section class="college-hero" style="background: url('Images/DSEC 2.jpeg') no-repeat center / cover;">
+
+        <div class="page-badge">🎓 Education</div>
+        <h1>My College Journey</h1>
+
+        <div class="college-card">
+            <img src="Images/DSEC 2.jpeg" alt="Dhanalakshmi Srinivasan Engineering College" class="college-card-img">
+
+            <div class="college-card-body">
+                <h2>Dhanalakshmi Srinivasan Engineering College</h2>
+                <p class="college-course">🖥️ B.Tech — Artificial Intelligence &amp; Data Science</p>
+
+                <p>
+                    I am currently pursuing my undergraduate degree in <strong style="color:#ffd369">Artificial Intelligence and Data Science</strong>
+                    at Dhanalakshmi Srinivasan Engineering College, Perambalur. This journey has been an incredible blend of academic
+                    rigour and personal growth, fuelling my passion for emerging technologies and their real-world impact.
+                </p>
+                <p>
+                    The curriculum exposes me to core areas like <strong style="color:#00c6ff">Machine Learning</strong>,
+                    <strong style="color:#00c6ff">Deep Learning</strong>, <strong style="color:#00c6ff">Data Analytics</strong>,
+                    and <strong style="color:#00c6ff">Python Programming</strong> — all of which I apply through hands-on projects and lab work.
+                </p>
+
+                <div class="college-info-grid">
+                    <div class="info-chip">
+                        <div class="label">Institution</div>
+                        <div class="value">DSEC</div>
+                    </div>
+                    <div class="info-chip">
+                        <div class="label">Degree</div>
+                        <div class="value">B.Tech</div>
+                    </div>
+                    <div class="info-chip">
+                        <div class="label">Specialization</div>
+                        <div class="value">AI &amp; DS</div>
+                    </div>
+                    <div class="info-chip">
+                        <div class="label">Year</div>
+                        <div class="value">2nd Year</div>
+                    </div>
+                    <div class="info-chip">
+                        <div class="label">Location</div>
+                        <div class="value">Perambalur</div>
+                    </div>
+                    <div class="info-chip">
+                        <div class="label">Batch</div>
+                        <div class="value">2023–2027</div>
+                    </div>
+                </div>
+
+                <a href="https://dsengg.ac.in/" target="_blank" class="college-visit-btn">
+                    🌐 Visit Official Website
+                </a>
+            </div>
+        </div>
+    </section>
+
+    <!-- ═══════════════ FOOTER ═══════════════ -->
+    <footer class="footer">
+        © 2026 <span>Bhaala Vishvanathan</span> — Built with passion & purpose.
+    </footer>
+
+</body>
+</html>

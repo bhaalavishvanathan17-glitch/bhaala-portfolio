@@ -1,0 +1,473 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Bhaala | Login & Register</title>
+    <meta name="description" content="Login or Register to access Bhaala Vishvanathan's portfolio.">
+    <style>
+        /* ──────────── RESET & BASE ──────────── */
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            overflow-x: hidden;
+            position: relative;
+        }
+
+        /* ──────────── VIDEO BACKGROUND ──────────── */
+        .video-bg {
+            position: fixed;
+            top: 0; left: 0;
+            width: 100%; height: 100%;
+            object-fit: cover;
+            z-index: -2;
+        }
+
+        .overlay {
+            position: fixed;
+            top: 0; left: 0;
+            width: 100%; height: 100%;
+            background: rgba(0,0,0,0.65);
+            z-index: -1;
+        }
+
+        /* ──────────── MINI NAVBAR ──────────── */
+        .mini-nav {
+            position: fixed;
+            top: 0; left: 0;
+            width: 100%;
+            padding: 16px 40px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            background: rgba(0,0,0,0.5);
+            backdrop-filter: blur(12px);
+            border-bottom: 1px solid rgba(255,80,80,0.2);
+            z-index: 100;
+        }
+
+        .mini-nav .brand {
+            font-size: 20px;
+            font-weight: 800;
+            background: linear-gradient(90deg, #f25050, #ffd369);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            text-decoration: none;
+            letter-spacing: 2px;
+        }
+
+        .mini-nav a.back {
+            color: rgba(255,255,255,0.7);
+            text-decoration: none;
+            font-size: 14px;
+            font-weight: 600;
+            transition: 0.3s;
+            display: flex;
+            align-items: center;
+            gap: 6px;
+        }
+
+        .mini-nav a.back:hover { color: #ffd369; }
+
+        /* ──────────── CARD WRAPPER ──────────── */
+        .auth-wrapper {
+            width: 100%;
+            max-width: 440px;
+            padding: 20px 16px;
+            margin-top: 80px;
+        }
+
+        .auth-card {
+            background: rgba(255,255,255,0.08);
+            backdrop-filter: blur(20px);
+            border: 1px solid rgba(255,255,255,0.12);
+            border-radius: 22px;
+            padding: 40px 36px;
+            box-shadow: 0 20px 80px rgba(0,0,0,0.5);
+            animation: slideUp 0.5s ease;
+        }
+
+        @keyframes slideUp {
+            from { opacity: 0; transform: translateY(30px); }
+            to   { opacity: 1; transform: translateY(0); }
+        }
+
+        /* ──────────── LOGO / TITLE ──────────── */
+        .auth-logo {
+            text-align: center;
+            margin-bottom: 28px;
+        }
+
+        .auth-logo .emoji { font-size: 40px; display: block; margin-bottom: 8px; }
+
+        .auth-logo h1 {
+            font-size: 24px;
+            font-weight: 800;
+            background: linear-gradient(90deg, #ffffff, #ffd369);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        .auth-logo p {
+            font-size: 13px;
+            color: rgba(255,255,255,0.55);
+            margin-top: 4px;
+        }
+
+        /* ──────────── TABS ──────────── */
+        .tab-row {
+            display: flex;
+            background: rgba(0,0,0,0.35);
+            border-radius: 12px;
+            padding: 4px;
+            margin-bottom: 30px;
+        }
+
+        .tab-btn {
+            flex: 1;
+            padding: 10px;
+            border: none;
+            background: transparent;
+            color: rgba(255,255,255,0.55);
+            font-size: 14px;
+            font-weight: 700;
+            border-radius: 9px;
+            cursor: pointer;
+            transition: 0.3s;
+            letter-spacing: 0.5px;
+        }
+
+        .tab-btn.active {
+            background: linear-gradient(135deg, #f81313, #c0030e);
+            color: white;
+            box-shadow: 0 4px 18px rgba(248,19,19,0.4);
+        }
+
+        /* ──────────── FORM PANELS ──────────── */
+        .form-panel { display: none; }
+        .form-panel.active { display: block; animation: fadeIn 0.35s ease; }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateX(10px); }
+            to   { opacity: 1; transform: translateX(0); }
+        }
+
+        /* ──────────── FORM FIELDS ──────────── */
+        .field {
+            margin-bottom: 18px;
+        }
+
+        .field label {
+            display: block;
+            font-size: 12px;
+            font-weight: 700;
+            color: rgba(255,255,255,0.65);
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            margin-bottom: 7px;
+        }
+
+        .field input {
+            width: 100%;
+            padding: 13px 16px;
+            background: rgba(255,255,255,0.07);
+            border: 1px solid rgba(255,255,255,0.15);
+            border-radius: 10px;
+            color: white;
+            font-size: 15px;
+            outline: none;
+            transition: 0.3s;
+            font-family: inherit;
+        }
+
+        .field input::placeholder { color: rgba(255,255,255,0.3); }
+
+        .field input:focus {
+            border-color: rgba(248,19,19,0.6);
+            background: rgba(255,255,255,0.1);
+            box-shadow: 0 0 15px rgba(248,19,19,0.2);
+        }
+
+        /* ──────────── SUBMIT BUTTON ──────────── */
+        .submit-btn {
+            width: 100%;
+            padding: 14px;
+            border: none;
+            border-radius: 12px;
+            background: linear-gradient(135deg, #f81313, #c0030e);
+            color: white;
+            font-size: 16px;
+            font-weight: 700;
+            font-family: inherit;
+            cursor: pointer;
+            transition: 0.35s;
+            margin-top: 6px;
+            letter-spacing: 0.5px;
+        }
+
+        .submit-btn:hover {
+            background: linear-gradient(135deg, #0072ff, #00c6ff);
+            transform: translateY(-2px);
+            box-shadow: 0 8px 30px rgba(0,114,255,0.4);
+        }
+
+        .submit-btn:active { transform: scale(0.98); }
+
+        .submit-btn:disabled {
+            opacity: 0.6;
+            cursor: not-allowed;
+            transform: none;
+        }
+
+        /* ──────────── MESSAGE BOX ──────────── */
+        .msg-box {
+            display: none;
+            margin-top: 16px;
+            padding: 12px 16px;
+            border-radius: 10px;
+            font-size: 14px;
+            font-weight: 600;
+            text-align: center;
+            animation: fadeIn 0.3s ease;
+        }
+
+        .msg-box.success {
+            background: rgba(0,200,100,0.15);
+            border: 1px solid rgba(0,200,100,0.4);
+            color: #4fffb0;
+        }
+
+        .msg-box.error {
+            background: rgba(248,19,19,0.15);
+            border: 1px solid rgba(248,19,19,0.4);
+            color: #ff7070;
+        }
+
+        /* ──────────── FOOTER TEXT ──────────── */
+        .auth-footer {
+            text-align: center;
+            margin-top: 20px;
+            font-size: 13px;
+            color: rgba(255,255,255,0.4);
+        }
+
+        .auth-footer span { color: #f25050; }
+
+        /* ──────────── LOADING SPINNER ──────────── */
+        .spinner {
+            display: inline-block;
+            width: 16px;
+            height: 16px;
+            border: 2px solid rgba(255,255,255,0.4);
+            border-top-color: white;
+            border-radius: 50%;
+            animation: spin 0.7s linear infinite;
+            margin-right: 8px;
+            vertical-align: middle;
+        }
+
+        @keyframes spin { to { transform: rotate(360deg); } }
+
+        input:-webkit-autofill {
+            -webkit-box-shadow: 0 0 0px 1000px rgba(30,10,10,0.9) inset !important;
+            -webkit-text-fill-color: white !important;
+        }
+    </style>
+</head>
+<body>
+
+    <!-- ─── VIDEO BACKGROUND ─── -->
+    <video autoplay muted loop playsinline class="video-bg">
+        <source src="Login background video 1.mp4" type="video/mp4">
+    </video>
+    <div class="overlay"></div>
+
+    <!-- ─── MINI NAV ─── -->
+    <nav class="mini-nav">
+        <a href="Bhaala.html" class="brand">BV</a>
+        <a href="Bhaala.html" class="back">← Back to Home</a>
+    </nav>
+
+    <!-- ─── AUTH CARD ─── -->
+    <div class="auth-wrapper">
+        <div class="auth-card">
+
+            <!-- Logo -->
+            <div class="auth-logo">
+                <span class="emoji">🙏</span>
+                <h1>Welcome</h1>
+                <p>Login or create an account to continue</p>
+            </div>
+
+            <!-- Tabs -->
+            <div class="tab-row">
+                <button class="tab-btn active" id="tab-login" onclick="switchTab('login')">Login</button>
+                <button class="tab-btn"        id="tab-register" onclick="switchTab('register')">Register</button>
+            </div>
+
+            <!-- ══ LOGIN PANEL ══ -->
+            <div class="form-panel active" id="panel-login">
+                <form id="login-form" onsubmit="handleLogin(event)">
+                    <div class="field">
+                        <label>Email Address</label>
+                        <input type="email" id="login-email" placeholder="you@example.com" required autocomplete="email">
+                    </div>
+                    <div class="field">
+                        <label>Password</label>
+                        <input type="password" id="login-password" placeholder="Enter your password" required autocomplete="current-password">
+                    </div>
+                    <button type="submit" class="submit-btn" id="login-btn">Login to Portfolio</button>
+                </form>
+                <div class="msg-box" id="login-msg"></div>
+                <p class="auth-footer">
+                    Don't have an account? <a href="#" onclick="switchTab('register')" style="color:#ffd369;text-decoration:none;font-weight:700;">Register here</a>
+                </p>
+            </div>
+
+            <!-- ══ REGISTER PANEL ══ -->
+            <div class="form-panel" id="panel-register">
+                <form id="register-form" onsubmit="handleRegister(event)">
+                    <div class="field">
+                        <label>Full Name</label>
+                        <input type="text" id="reg-name" placeholder="Your full name" required autocomplete="name">
+                    </div>
+                    <div class="field">
+                        <label>Email Address</label>
+                        <input type="email" id="reg-email" placeholder="you@example.com" required autocomplete="email">
+                    </div>
+                    <div class="field">
+                        <label>Phone Number</label>
+                        <input type="tel" id="reg-phone" placeholder="+91 9876543210" required autocomplete="tel">
+                    </div>
+                    <div class="field">
+                        <label>Password</label>
+                        <input type="password" id="reg-password" placeholder="Create a password (min 6 chars)" minlength="6" required autocomplete="new-password">
+                    </div>
+                    <button type="submit" class="submit-btn" id="register-btn">Create Account</button>
+                </form>
+                <div class="msg-box" id="register-msg"></div>
+                <p class="auth-footer">
+                    Already registered? <a href="#" onclick="switchTab('login')" style="color:#ffd369;text-decoration:none;font-weight:700;">Login here</a>
+                </p>
+            </div>
+
+            <div class="auth-footer" style="margin-top:24px;">
+                © 2026 <span>Bhaala Vishvanathan</span>
+            </div>
+
+        </div>
+    </div>
+
+    <script>
+        const SERVER = 'http://localhost:3000';
+
+        // ── TAB SWITCHER ──
+        function switchTab(tab) {
+            document.getElementById('tab-login').classList.toggle('active', tab === 'login');
+            document.getElementById('tab-register').classList.toggle('active', tab === 'register');
+            document.getElementById('panel-login').classList.toggle('active', tab === 'login');
+            document.getElementById('panel-register').classList.toggle('active', tab === 'register');
+            clearMessages();
+        }
+
+        function clearMessages() {
+            ['login-msg', 'register-msg'].forEach(id => {
+                const el = document.getElementById(id);
+                el.style.display = 'none';
+                el.textContent = '';
+                el.className = 'msg-box';
+            });
+        }
+
+        function showMsg(id, text, type) {
+            const el = document.getElementById(id);
+            el.textContent = text;
+            el.className = `msg-box ${type}`;
+            el.style.display = 'block';
+        }
+
+        function setLoading(btnId, loading, defaultText) {
+            const btn = document.getElementById(btnId);
+            btn.disabled = loading;
+            btn.innerHTML = loading
+                ? `<span class="spinner"></span>Please wait…`
+                : defaultText;
+        }
+
+        // ── LOGIN HANDLER ──
+        async function handleLogin(e) {
+            e.preventDefault();
+            clearMessages();
+            const email    = document.getElementById('login-email').value.trim();
+            const password = document.getElementById('login-password').value;
+
+            setLoading('login-btn', true, 'Login to Portfolio');
+            try {
+                const res  = await fetch(`${SERVER}/login`, {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({ email, password })
+                });
+                const data = await res.json();
+
+                if (data.success) {
+                    showMsg('login-msg', `✅ ${data.message}`, 'success');
+                    // Store session so guarded pages let the user through
+                    sessionStorage.setItem('bhaala_logged_in', 'true');
+                    sessionStorage.setItem('bhaala_user', data.name || email);
+                    setTimeout(() => { window.location.href = 'Bhaala.html'; }, 1400);
+                } else {
+                    showMsg('login-msg', `❌ ${data.message}`, 'error');
+                    setLoading('login-btn', false, 'Login to Portfolio');
+                }
+            } catch (err) {
+                showMsg('login-msg', '❌ Cannot connect to server. Is it running?', 'error');
+                setLoading('login-btn', false, 'Login to Portfolio');
+            }
+        }
+
+        // ── REGISTER HANDLER ──
+        async function handleRegister(e) {
+            e.preventDefault();
+            clearMessages();
+            const name     = document.getElementById('reg-name').value.trim();
+            const email    = document.getElementById('reg-email').value.trim();
+            const phone    = document.getElementById('reg-phone').value.trim();
+            const password = document.getElementById('reg-password').value;
+
+            if (password.length < 6) {
+                showMsg('register-msg', '❌ Password must be at least 6 characters.', 'error');
+                return;
+            }
+
+            setLoading('register-btn', true, 'Create Account');
+            try {
+                const res  = await fetch(`${SERVER}/register`, {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({ name, email, password, phone })
+                });
+                const data = await res.json();
+
+                if (data.success) {
+                    showMsg('register-msg', `✅ ${data.message}`, 'success');
+                    document.getElementById('register-form').reset();
+                    setTimeout(() => switchTab('login'), 2200);
+                } else {
+                    showMsg('register-msg', `❌ ${data.message}`, 'error');
+                }
+            } catch (err) {
+                showMsg('register-msg', '❌ Cannot connect to server. Is it running?', 'error');
+            } finally {
+                setLoading('register-btn', false, 'Create Account');
+            }
+        }
+    </script>
+</body>
+</html>

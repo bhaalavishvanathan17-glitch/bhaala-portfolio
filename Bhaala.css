@@ -1,0 +1,819 @@
+/* ======================================================
+   BHAALA PORTFOLIO — Global CSS
+   ====================================================== */
+
+/* ================= RESET & BASE ================= */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+html {
+    scroll-behavior: smooth;
+}
+
+body {
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    color: white;
+    background: linear-gradient(135deg, #0a0a0a 0%, #1a0505 50%, #0a0a0a 100%);
+    background-attachment: fixed;
+    line-height: 1.7;
+    min-height: 100vh;
+}
+
+/* ================= SCROLLBAR ================= */
+::-webkit-scrollbar { width: 8px; }
+::-webkit-scrollbar-track { background: #111; }
+::-webkit-scrollbar-thumb {
+    background: linear-gradient(180deg, #ff512f, #dd2476);
+    border-radius: 20px;
+}
+
+/* ================= NAVBAR ================= */
+.navbar {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 65px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 0 60px;
+    background: rgba(0, 0, 0, 0.85);
+    backdrop-filter: blur(12px);
+    border-bottom: 1px solid rgba(255, 80, 80, 0.2);
+    z-index: 1000;
+}
+
+.navbar-brand {
+    font-size: 22px;
+    font-weight: 800;
+    background: linear-gradient(90deg, #f25050, #ffd369);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    letter-spacing: 2px;
+    text-decoration: none;
+}
+
+.navbar ul {
+    display: flex;
+    gap: 35px;
+    list-style: none;
+}
+
+.navbar a {
+    text-decoration: none;
+    color: rgba(255,255,255,0.85);
+    font-size: 15px;
+    font-weight: 600;
+    letter-spacing: 0.5px;
+    transition: 0.3s;
+    position: relative;
+    padding-bottom: 4px;
+}
+
+.navbar a::after {
+    content: '';
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 0;
+    height: 2px;
+    background: linear-gradient(90deg, #f25050, #ffd369);
+    transition: 0.3s;
+}
+
+.navbar a:hover { color: #ffd369; }
+.navbar a:hover::after { width: 100%; }
+.navbar a.active { color: #ffd369; }
+.navbar a.active::after { width: 100%; }
+
+.navbar .nav-login-btn {
+    background: linear-gradient(135deg, #f81313, #c0030e);
+    color: white !important;
+    padding: 8px 22px;
+    border-radius: 25px;
+    font-size: 14px;
+    transition: 0.3s;
+    -webkit-text-fill-color: white !important;
+}
+.navbar .nav-login-btn::after { display: none; }
+.navbar .nav-login-btn:hover {
+    background: linear-gradient(135deg, #0072ff, #00c6ff);
+    transform: translateY(-2px);
+    box-shadow: 0 5px 20px rgba(0, 114, 255, 0.4);
+}
+
+/* ================= HERO SECTION ================= */
+.hero {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 80px;
+    padding: 130px 10% 80px;
+    flex-wrap: wrap;
+    min-height: 100vh;
+    position: relative;
+    overflow: hidden;
+    background: url('Images/Background image 7.jpg') no-repeat center / cover;
+}
+
+.hero::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(135deg, rgba(0,0,0,0.75) 0%, rgba(108,11,11,0.4) 50%, rgba(0,0,0,0.75) 100%);
+}
+
+.hero > * { position: relative; z-index: 1; }
+
+.hero-text { max-width: 560px; }
+
+.hero-greeting {
+    font-size: 16px;
+    color: #ffd369;
+    letter-spacing: 3px;
+    text-transform: uppercase;
+    margin-bottom: 14px;
+    font-weight: 600;
+}
+
+.hero-text h1 {
+    font-size: 52px;
+    font-weight: 800;
+    line-height: 1.15;
+    margin-bottom: 10px;
+    background: linear-gradient(90deg, #ffffff, #f25050);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+}
+
+.hero-text h3 {
+    font-size: 20px;
+    font-weight: 400;
+    color: #e1a7f4;
+    margin-bottom: 22px;
+}
+
+.hero-text p {
+    font-size: 16px;
+    color: rgba(255,255,255,0.82);
+    margin-bottom: 35px;
+    line-height: 1.85;
+}
+
+.hero-buttons { display: flex; gap: 18px; flex-wrap: wrap; }
+
+.btn-primary {
+    padding: 13px 32px;
+    background: linear-gradient(135deg, #f81313, #c0030e);
+    color: white;
+    text-decoration: none;
+    border-radius: 30px;
+    font-weight: 700;
+    font-size: 15px;
+    transition: 0.35s;
+    display: inline-block;
+    border: none;
+    cursor: pointer;
+}
+.btn-primary:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 8px 30px rgba(248, 19, 19, 0.5);
+}
+
+.btn-outline {
+    padding: 13px 32px;
+    background: transparent;
+    color: white;
+    text-decoration: none;
+    border-radius: 30px;
+    font-weight: 600;
+    font-size: 15px;
+    border: 2px solid rgba(255,255,255,0.4);
+    transition: 0.35s;
+    display: inline-block;
+}
+.btn-outline:hover {
+    border-color: #ffd369;
+    color: #ffd369;
+    transform: translateY(-3px);
+}
+
+/* ================= HERO IMAGE ================= */
+.hero-img { position: relative; }
+
+.hero-img img {
+    width: 320px;
+    height: 380px;
+    object-fit: cover;
+    object-position: top;
+    border-radius: 24px;
+    box-shadow: 0 0 40px rgba(248, 19, 19, 0.45), 0 0 80px rgba(0,0,0,0.6);
+    transition: 0.5s ease;
+    border: 2px solid rgba(255,80,80,0.3);
+}
+
+.hero-img img:hover {
+    transform: scale(1.04) translateY(-5px);
+    box-shadow: 0 0 60px rgba(248, 19, 19, 0.65), 0 0 100px rgba(0,0,0,0.7);
+}
+
+.hero-img-badge {
+    position: absolute;
+    bottom: -18px;
+    right: -18px;
+    background: linear-gradient(135deg, #f81313, #c0030e);
+    padding: 14px 20px;
+    border-radius: 16px;
+    text-align: center;
+    font-size: 12px;
+    font-weight: 700;
+    line-height: 1.4;
+    box-shadow: 0 8px 30px rgba(248,19,19,0.4);
+}
+
+.hero-img-badge span { font-size: 24px; font-weight: 800; display: block; }
+
+/* ================= SKILLS SECTION ================= */
+.skills-section {
+    padding: 90px 8%;
+    background: rgba(0,0,0,0.3);
+}
+
+.section-header {
+    text-align: center;
+    margin-bottom: 60px;
+}
+
+.section-header h2 {
+    font-size: 38px;
+    font-weight: 800;
+    background: linear-gradient(90deg, #00c6ff, #0072ff);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    margin-bottom: 12px;
+}
+
+.section-header p {
+    color: rgba(255,255,255,0.6);
+    font-size: 16px;
+    max-width: 500px;
+    margin: 0 auto;
+}
+
+.section-header .divider {
+    width: 60px;
+    height: 4px;
+    background: linear-gradient(90deg, #f25050, #ffd369);
+    border-radius: 2px;
+    margin: 16px auto 0;
+}
+
+.skills-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    gap: 28px;
+    max-width: 1100px;
+    margin: 0 auto;
+}
+
+.skill-card {
+    background: rgba(255,255,255,0.04);
+    border: 1px solid rgba(255,255,255,0.1);
+    border-radius: 18px;
+    padding: 35px 28px;
+    text-align: center;
+    transition: 0.4s ease;
+    cursor: default;
+    backdrop-filter: blur(10px);
+}
+
+.skill-card:hover {
+    transform: translateY(-10px);
+    background: rgba(255,80,80,0.08);
+    border-color: rgba(248,19,19,0.4);
+    box-shadow: 0 15px 50px rgba(248,19,19,0.2);
+}
+
+.skill-icon {
+    font-size: 48px;
+    margin-bottom: 18px;
+    display: block;
+}
+
+.skill-card h3 {
+    font-size: 20px;
+    font-weight: 700;
+    margin-bottom: 10px;
+    color: #fff;
+}
+
+.skill-card p {
+    font-size: 14px;
+    color: rgba(255,255,255,0.6);
+    line-height: 1.7;
+}
+
+/* ================= CONTACT SECTION ================= */
+.contact-section {
+    padding: 90px 8%;
+    text-align: center;
+    background: url('Images/Background image 7.jpg') no-repeat center / cover;
+    position: relative;
+}
+
+.contact-section::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: rgba(0,0,0,0.75);
+}
+
+.contact-section > * { position: relative; z-index: 1; }
+
+.contact-section h2 {
+    font-size: 38px;
+    font-weight: 800;
+    margin-bottom: 14px;
+    color: white;
+    text-shadow: 0 0 20px rgba(255,255,255,0.3);
+}
+
+.contact-section p {
+    color: rgba(255,255,255,0.65);
+    font-size: 16px;
+    margin-bottom: 45px;
+}
+
+.contact-links {
+    display: flex;
+    justify-content: center;
+    gap: 20px;
+    flex-wrap: wrap;
+}
+
+.contact-link {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    padding: 14px 28px;
+    background: rgba(255,255,255,0.08);
+    border: 1px solid rgba(255,255,255,0.15);
+    border-radius: 50px;
+    color: white;
+    text-decoration: none;
+    font-size: 15px;
+    font-weight: 600;
+    transition: 0.35s;
+    backdrop-filter: blur(10px);
+}
+
+.contact-link:hover {
+    background: rgba(248,19,19,0.2);
+    border-color: #f81313;
+    color: #ffd369;
+    transform: translateY(-4px);
+    box-shadow: 0 8px 30px rgba(248,19,19,0.3);
+}
+
+/* ================= FOOTER ================= */
+.footer {
+    text-align: center;
+    padding: 30px 20px;
+    background: #0a0a0a;
+    color: rgba(255,255,255,0.4);
+    font-size: 14px;
+    border-top: 1px solid rgba(255,255,255,0.06);
+}
+
+.footer span { color: #f25050; }
+
+/* ================= HR ================= */
+hr {
+    border: none;
+    height: 1px;
+    background: rgba(255,255,255,0.1);
+    margin: 0;
+}
+
+/* ================= COLLEGE PAGE ================= */
+.college-hero {
+    min-height: 100vh;
+    padding: 120px 8% 80px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    position: relative;
+    overflow: hidden;
+}
+
+.college-hero::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(135deg, rgba(0,0,0,0.9) 0%, rgba(108,11,11,0.5) 60%, rgba(0,0,0,0.9) 100%);
+}
+
+.college-hero > * { position: relative; z-index: 1; }
+
+.page-badge {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    background: rgba(248,19,19,0.15);
+    border: 1px solid rgba(248,19,19,0.35);
+    padding: 8px 20px;
+    border-radius: 50px;
+    font-size: 13px;
+    color: #ffd369;
+    font-weight: 600;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    margin-bottom: 24px;
+}
+
+.college-hero h1 {
+    font-size: 52px;
+    font-weight: 800;
+    text-align: center;
+    background: linear-gradient(90deg, #ffffff, #ffd369);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    margin-bottom: 50px;
+    line-height: 1.2;
+}
+
+.college-card {
+    max-width: 850px;
+    width: 100%;
+    background: rgba(255,255,255,0.04);
+    border: 1px solid rgba(255,255,255,0.1);
+    border-radius: 24px;
+    overflow: hidden;
+    backdrop-filter: blur(12px);
+    box-shadow: 0 0 60px rgba(248,19,19,0.15);
+    transition: 0.4s;
+}
+
+.college-card:hover {
+    transform: translateY(-6px);
+    box-shadow: 0 20px 80px rgba(248,19,19,0.25);
+}
+
+.college-card-img {
+    width: 100%;
+    height: 320px;
+    object-fit: cover;
+    display: block;
+}
+
+.college-card-body {
+    padding: 40px;
+}
+
+.college-card-body h2 {
+    font-size: 26px;
+    font-weight: 800;
+    color: #ffd369;
+    margin-bottom: 8px;
+}
+
+.college-card-body .college-course {
+    font-size: 16px;
+    color: #00c6ff;
+    font-weight: 600;
+    margin-bottom: 20px;
+}
+
+.college-card-body p {
+    color: rgba(255,255,255,0.75);
+    font-size: 15px;
+    line-height: 1.85;
+    margin-bottom: 28px;
+}
+
+.college-info-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(160px, 1fr));
+    gap: 16px;
+    margin-bottom: 30px;
+}
+
+.info-chip {
+    background: rgba(255,255,255,0.06);
+    border: 1px solid rgba(255,255,255,0.1);
+    border-radius: 12px;
+    padding: 14px;
+    text-align: center;
+}
+
+.info-chip .label {
+    font-size: 11px;
+    color: rgba(255,255,255,0.5);
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    margin-bottom: 4px;
+}
+
+.info-chip .value {
+    font-size: 14px;
+    font-weight: 700;
+    color: #ffd369;
+}
+
+.college-visit-btn {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    padding: 13px 30px;
+    background: linear-gradient(135deg, #f81313, #c0030e);
+    color: white;
+    text-decoration: none;
+    border-radius: 30px;
+    font-weight: 700;
+    font-size: 15px;
+    transition: 0.35s;
+}
+
+.college-visit-btn:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 8px 30px rgba(248,19,19,0.5);
+}
+
+/* ================= UTILITY ================= */
+.text-gradient-red {
+    background: linear-gradient(90deg, #f25050, #ffd369);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+}
+
+/* ================= ANIMATIONS ================= */
+@keyframes fadeUp {
+    0% { opacity: 0; transform: translateY(40px); }
+    100% { opacity: 1; transform: translateY(0); }
+}
+
+@keyframes float {
+    0%, 100% { transform: translateY(0); }
+    50% { transform: translateY(-15px); }
+}
+
+.animate-fade-up { animation: fadeUp 0.8s ease forwards; }
+.hero-img { animation: float 6s ease-in-out infinite; }
+
+/* ================= MOBILE ================= */
+@media (max-width: 900px) {
+    .navbar { padding: 0 24px; }
+    .navbar-brand { font-size: 18px; }
+
+    .hero { gap: 50px; padding: 100px 6% 60px; flex-direction: column; text-align: center; }
+    .hero-text h1 { font-size: 38px; }
+    .hero-buttons { justify-content: center; }
+    .hero-img img { width: 260px; height: 300px; }
+    .hero-img-badge { bottom: -14px; right: -10px; }
+
+    .college-hero h1 { font-size: 36px; }
+    .college-card-img { height: 220px; }
+    .college-card-body { padding: 24px; }
+    
+    .about-title { font-size: 42px; }
+    .about-main-card { padding: 30px; }
+    .school-header h1 { font-size: 38px; }
+}
+
+@media (max-width: 580px) {
+    .navbar ul { gap: 18px; }
+    .skills-grid { grid-template-columns: 1fr; }
+    .contact-links { flex-direction: column; align-items: center; }
+}
+
+/* ================= ABOUT ME ================= */
+.about-hero {
+    padding: 130px 8% 50px;
+    text-align: center;
+    background: url('Images/Background image 7.jpg') no-repeat center / cover;
+    position: relative;
+    overflow: hidden;
+}
+
+.about-hero::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(135deg, rgba(0,0,0,0.85) 0%, rgba(108,11,11,0.6) 100%);
+    box-shadow: inset 0 -60px 80px -40px #0a0a0a;
+}
+
+.about-hero > * {
+    position: relative;
+    z-index: 1;
+}
+
+.about-title {
+    font-size: 56px;
+    font-weight: 800;
+    background: linear-gradient(90deg, #ffffff, #f25050);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    margin-bottom: 12px;
+}
+
+.about-subtitle {
+    font-size: 20px;
+    color: #ffd369;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    font-weight: 600;
+}
+
+.about-content {
+    max-width: 900px;
+    margin: 0 auto;
+    padding: 20px 8% 90px;
+}
+
+.about-main-card {
+    background: rgba(255,255,255,0.03);
+    border: 1px solid rgba(255,255,255,0.08);
+    border-radius: 24px;
+    padding: 60px;
+    backdrop-filter: blur(16px);
+    box-shadow: 0 15px 50px rgba(0,0,0,0.5);
+    display: flex;
+    flex-direction: column;
+    gap: 40px;
+}
+
+.about-section {
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+}
+
+.about-section-title {
+    font-size: 28px;
+    font-weight: 700;
+    color: #00c6ff;
+    border-bottom: 2px solid rgba(255,255,255,0.1);
+    padding-bottom: 15px;
+    margin-bottom: 5px;
+}
+
+.about-section p {
+    font-size: 16px;
+    color: rgba(255,255,255,0.85);
+    line-height: 1.9;
+}
+
+.about-section strong {
+    color: #ffd369;
+    font-weight: 700;
+}
+
+.about-divider {
+    border: none;
+    height: 1px;
+    background: rgba(255,255,255,0.1);
+    width: 100%;
+}
+
+.about-tags {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 12px;
+}
+
+.about-tag {
+    background: rgba(0, 198, 255, 0.08);
+    border: 1px solid rgba(0, 198, 255, 0.3);
+    color: #00c6ff;
+    padding: 8px 18px;
+    border-radius: 30px;
+    font-size: 14px;
+    font-weight: 600;
+    transition: 0.3s;
+}
+
+.about-tag:hover {
+    background: rgba(0, 198, 255, 0.2);
+    transform: translateY(-2px);
+}
+
+.about-list {
+    list-style-type: none;
+    padding-left: 0;
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+}
+
+.about-list li {
+    font-size: 16px;
+    color: rgba(255,255,255,0.85);
+    padding-left: 28px;
+    position: relative;
+    line-height: 1.7;
+}
+
+.about-list li::before {
+    content: '🚀';
+    position: absolute;
+    left: 0;
+    top: 2px;
+    font-size: 14px;
+}
+
+/* ================= SCHOOL PAGE ================= */
+.school-section {
+    padding: 130px 8% 100px;
+    min-height: 100vh;
+    background: linear-gradient(135deg, rgba(0,0,0,0.85) 0%, rgba(108,11,11,0.4) 50%, rgba(0,0,0,0.85) 100%);
+    position: relative;
+}
+
+.school-header {
+    text-align: center;
+    margin-bottom: 70px;
+}
+.school-header h1 {
+    font-size: 48px;
+    font-weight: 800;
+    background: linear-gradient(90deg, #ffffff, #00c6ff);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    margin-bottom: 12px;
+}
+.school-header p {
+    color: rgba(255,255,255,0.6);
+    font-size: 18px;
+    max-width: 600px;
+    margin: 0 auto;
+}
+
+.school-container {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: 40px;
+    max-width: 1200px;
+    margin: 0 auto;
+}
+
+.school-card-v2 {
+    background: rgba(255,255,255,0.02);
+    border: 1px solid rgba(255,255,255,0.1);
+    border-radius: 20px;
+    overflow: hidden;
+    backdrop-filter: blur(10px);
+    transition: 0.4s ease;
+    box-shadow: 0 0 30px rgba(0,0,0,0.4);
+    display: flex;
+    flex-direction: column;
+}
+
+.school-card-v2:hover {
+    transform: translateY(-8px);
+    border-color: rgba(0, 198, 255, 0.4);
+    box-shadow: 0 15px 50px rgba(0, 198, 255, 0.2);
+}
+
+.school-card-v2 a {
+    display: block;
+    overflow: hidden;
+    height: 220px;
+}
+
+.school-card-v2 img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    transition: 0.5s ease;
+}
+
+.school-card-v2:hover img {
+    transform: scale(1.08);
+}
+
+.school-card-body {
+    padding: 25px;
+    text-align: center;
+    flex-grow: 1;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.school-link-badge {
+    font-size: 18px;
+    font-weight: 700;
+    color: #fff;
+    text-decoration: none;
+    transition: 0.3s;
+}
+
+.school-card-v2:hover .school-link-badge {
+    color: #00c6ff;
+}
