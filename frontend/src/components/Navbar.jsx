@@ -1,0 +1,89 @@
+import { useState, useEffect } from 'react';
+import { NavLink, useNavigate } from 'react-router-dom';
+import { useTheme } from '../context/ThemeContext';
+import { useAuth }  from '../context/AuthContext';
+import './Navbar.css';
+
+export default function Navbar() {
+  const { theme, toggle } = useTheme();
+  const { user, signOut } = useAuth();
+  const navigate = useNavigate();
+  const [scrolled,    setScrolled]    = useState(false);
+  const [menuOpen,    setMenuOpen]    = useState(false);
+
+  useEffect(() => {
+    const onScroll = () => setScrolled(window.scrollY > 30);
+    window.addEventListener('scroll', onScroll);
+    return () => window.removeEventListener('scroll', onScroll);
+  }, []);
+
+  // Close menu on route change
+  const closeMenu = () => setMenuOpen(false);
+
+  const handleLogout = async () => {
+    await signOut();
+    closeMenu();
+    navigate('/login');
+  };
+
+  return (
+    <nav className={`navbar${scrolled ? ' scrolled' : ''}`}>
+      <NavLink to="/" className="navbar-brand" onClick={closeMenu}>BV</NavLink>
+
+      {/* Desktop links */}
+      <ul className="nav-links">
+        <li><NavLink to="/"        end>Home</NavLink></li>
+        <li><NavLink to="/about"      >About Me</NavLink></li>
+        <li><NavLink to="/school"     >My School</NavLink></li>
+        <li><NavLink to="/college"    >My College</NavLink></li>
+      </ul>
+
+      {/* Right controls */}
+      <div className="nav-right">
+        <button
+          className="theme-toggle"
+          onClick={toggle}
+          aria-label="Toggle theme"
+          title={theme === 'dark' ? 'Switch to Light Mode' : 'Switch to Dark Mode'}
+        >
+          {theme === 'dark' ? '☀️' : '🌙'}
+        </button>
+
+        {user ? (
+          <button className="nav-btn logout-btn" onClick={handleLogout}>
+            Sign Out
+          </button>
+        ) : (
+          <NavLink to="/login" className="nav-btn login-btn" onClick={closeMenu}>
+            Login
+          </NavLink>
+        )}
+
+        {/* Hamburger */}
+        <button
+          className={`hamburger${menuOpen ? ' open' : ''}`}
+          onClick={() => setMenuOpen(o => !o)}
+          aria-label="Toggle menu"
+        >
+          <span /><span /><span />
+        </button>
+      </div>
+
+      {/* Mobile drawer */}
+      <div className={`mobile-menu${menuOpen ? ' open' : ''}`}>
+        <NavLink to="/"       end   onClick={closeMenu}>Home</NavLink>
+        <NavLink to="/about"        onClick={closeMenu}>About Me</NavLink>
+        <NavLink to="/school"       onClick={closeMenu}>My School</NavLink>
+        <NavLink to="/college"      onClick={closeMenu}>My College</NavLink>
+        <button className="theme-toggle-mobile" onClick={() => { toggle(); closeMenu(); }}>
+          {theme === 'dark' ? '☀️ Light Mode' : '🌙 Dark Mode'}
+        </button>
+        {user ? (
+          <button className="nav-btn logout-btn" onClick={handleLogout}>Sign Out</button>
+        ) : (
+          <NavLink to="/login" className="nav-btn login-btn" onClick={closeMenu}>Login</NavLink>
+        )}
+      </div>
+    </nav>
+  );
+}

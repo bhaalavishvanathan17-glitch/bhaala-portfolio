@@ -1,0 +1,94 @@
+.college-hero {
+  position: relative;
+  min-height: 55vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: url('/images/DSEC 2.jpeg') no-repeat center / cover;
+  text-align: center;
+  padding: 130px 8% 70px;
+}
+.college-overlay {
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(135deg, rgba(0,0,0,0.92) 0%, rgba(108,11,11,0.5) 60%, rgba(0,0,0,0.92) 100%);
+  box-shadow: inset 0 -60px 80px -40px var(--bg-base);
+}
+.college-hero-content { position: relative; z-index: 1; }
+.college-hero-content h1 {
+  font-size: 52px;
+  font-weight: 900;
+  background: linear-gradient(90deg, #fff, var(--gold));
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+/* Body */
+.college-body { padding: 60px 0 100px; }
+
+.college-card { overflow: hidden; }
+
+.college-img {
+  width: 100%;
+  height: 320px;
+  object-fit: cover;
+  display: block;
+  border-radius: 0;
+}
+
+.college-card-body {
+  padding: 44px 48px;
+  display: flex;
+  flex-direction: column;
+  gap: 18px;
+}
+.college-card-body h2 {
+  font-size: 26px;
+  font-weight: 800;
+  color: var(--gold);
+}
+.college-course {
+  font-size: 16px;
+  font-weight: 600;
+  color: var(--cyan);
+}
+.college-card-body p {
+  font-size: 15px;
+  color: var(--text-secondary);
+  line-height: 1.9;
+}
+.college-card-body strong { color: var(--cyan); font-weight: 700; }
+
+/* Info grid */
+.college-info-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(140px, 1fr));
+  gap: 14px;
+  margin: 8px 0 12px;
+}
+.info-chip {
+  background: var(--bg-overlay);
+  border: 1px solid var(--border);
+  border-radius: 12px;
+  padding: 14px;
+  text-align: center;
+}
+.chip-label {
+  font-size: 10px;
+  color: var(--text-muted);
+  text-transform: uppercase;
+  letter-spacing: 1.2px;
+  margin-bottom: 5px;
+}
+.chip-value {
+  font-size: 15px;
+  font-weight: 700;
+  color: var(--gold);
+}
+
+@media (max-width: 768px) {
+  .college-hero-content h1 { font-size: 34px; }
+  .college-img { height: 220px; }
+  .college-card-body { padding: 28px 24px; }
+}

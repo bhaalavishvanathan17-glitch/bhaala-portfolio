@@ -1,0 +1,24 @@
+.footer {
+  text-align: center;
+  padding: 28px 20px 20px;
+  background: var(--bg-surface);
+  color: var(--text-muted);
+  font-size: 14px;
+  border-top: 1px solid var(--border);
+}
+.footer span { color: var(--red); font-weight: 600; }
+
+.footer-links {
+  display: flex;
+  justify-content: center;
+  gap: 20px;
+  flex-wrap: wrap;
+  margin-top: 12px;
+}
+.footer-links a {
+  color: var(--text-muted);
+  font-size: 13px;
+  font-weight: 500;
+  transition: color var(--ease);
+}
+.footer-links a:hover { color: var(--gold); }

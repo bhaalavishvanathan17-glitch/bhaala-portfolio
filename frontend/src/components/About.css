@@ -1,0 +1,91 @@
+/* About hero */
+.about-hero {
+  position: relative;
+  padding: 140px 8% 60px;
+  text-align: center;
+  background: url('/images/Background image 7.jpg') no-repeat center / cover;
+  overflow: hidden;
+}
+.about-hero-overlay {
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(135deg, rgba(0,0,0,0.88) 0%, rgba(108,11,11,0.55) 100%);
+  box-shadow: inset 0 -60px 80px -40px var(--bg-base);
+}
+.about-hero-content { position: relative; z-index: 1; }
+.about-title { font-size: 58px; font-weight: 900; margin-bottom: 8px; }
+
+/* Body */
+.about-body { padding: 50px 0 100px; }
+
+.about-card {
+  padding: 60px;
+  display: flex;
+  flex-direction: column;
+  gap: 40px;
+}
+
+/* Sections */
+.about-section { display: flex; flex-direction: column; gap: 16px; }
+
+.about-section-title {
+  font-size: 26px;
+  font-weight: 700;
+  color: var(--cyan);
+  padding-bottom: 14px;
+  border-bottom: 2px solid var(--border);
+}
+
+.about-section p {
+  font-size: 16px;
+  color: var(--text-secondary);
+  line-height: 1.95;
+}
+.about-section strong { color: var(--gold); font-weight: 700; }
+
+.about-divider {
+  border: none;
+  height: 1px;
+  background: var(--border);
+}
+
+/* Tags */
+.about-tags { display: flex; flex-wrap: wrap; gap: 12px; }
+
+.about-tag {
+  background: rgba(0,198,255,0.07);
+  border: 1px solid rgba(0,198,255,0.28);
+  color: var(--cyan);
+  padding: 8px 20px;
+  border-radius: 50px;
+  font-size: 14px;
+  font-weight: 600;
+  transition: var(--ease);
+  cursor: default;
+}
+.about-tag:hover {
+  background: rgba(0,198,255,0.16);
+  transform: translateY(-3px);
+}
+
+/* Achievement list */
+.about-list { list-style: none; display: flex; flex-direction: column; gap: 16px; padding: 0; }
+.about-list li {
+  font-size: 16px;
+  color: var(--text-secondary);
+  padding-left: 32px;
+  position: relative;
+  line-height: 1.75;
+}
+.about-list li::before {
+  content: '🚀';
+  position: absolute;
+  left: 0;
+  top: 1px;
+  font-size: 15px;
+}
+
+@media (max-width: 768px) {
+  .about-title  { font-size: 40px; }
+  .about-card   { padding: 32px 24px; }
+}
