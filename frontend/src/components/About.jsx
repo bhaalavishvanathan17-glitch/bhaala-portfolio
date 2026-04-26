@@ -45,7 +45,7 @@ export default function About() {
 
           {/* Skills */}
           <section className="about-section">
-            <h2 className="about-section-title">Skills &amp; Technologies</h2>
+            <h2 className="about-section-title">Skills & Technologies</h2>
             <div className="about-tags">
               {TAGS.map(t => (
                 <span key={t} className="about-tag">{t}</span>
@@ -57,7 +57,7 @@ export default function About() {
 
           {/* Goals */}
           <section className="about-section">
-            <h2 className="about-section-title">Goals &amp; Vision</h2>
+            <h2 className="about-section-title">Goals & Vision</h2>
             <p>
               I strongly believe that <strong>personal growth comes from embracing challenges</strong>, learning from
               failures, and maintaining the courage to pursue dreams even when uncertain. My vision is to build{' '}
@@ -70,7 +70,7 @@ export default function About() {
 
           {/* Achievements */}
           <section className="about-section">
-            <h2 className="about-section-title">Achievements &amp; Highlights</h2>
+            <h2 className="about-section-title">Achievements & Highlights</h2>
             <ul className="about-list">
               {ACHIEVEMENTS.map(a => (
                 <li key={a}>{a}</li>

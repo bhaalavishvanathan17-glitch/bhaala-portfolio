@@ -30,7 +30,7 @@ export default function College() {
           />
           <div className="college-card-body">
             <h2>Dhanalakshmi Srinivasan Engineering College</h2>
-            <p className="college-course">🖥️ B.Tech — Artificial Intelligence &amp; Data Science</p>
+            <p className="college-course">🖥️ B.Tech — Artificial Intelligence & Data Science</p>
 
             <p>
               I am currently pursuing my undergraduate degree in{' '}

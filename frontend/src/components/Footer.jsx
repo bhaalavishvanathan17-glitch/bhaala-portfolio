@@ -8,9 +8,9 @@ export default function Footer() {
       </p>
       <div className="footer-links">
         <a href="https://www.instagram.com/_bhaala_/" target="_blank" rel="noreferrer">Instagram</a>
-        <a href="https://linkedin.com"                 target="_blank" rel="noreferrer">LinkedIn</a>
-        <a href="https://github.com"                   target="_blank" rel="noreferrer">GitHub</a>
-        <a href="mailto:bhaala@example.com"                                           >Email</a>
+        <a href="https://www.linkedin.com/in/bhaalavishvanathan-c-59576a312/" target="_blank" rel="noreferrer">LinkedIn</a>
+        <a href="https://github.com/bhaalavishvanathan17-glitch" target="_blank" rel="noreferrer">GitHub</a>
+        <a href="mailto:bhaalavishvanathan17@gmail.com">Email</a>
       </div>
     </footer>
   );

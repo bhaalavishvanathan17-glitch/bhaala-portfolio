@@ -45,7 +45,7 @@ export default function Skills() {
       <div className="container">
         <div className="text-center animate-fade-up">
           <p className="section-label">What I Do</p>
-          <h2 className="section-title gradient-text-cyan">Skills &amp; Interests</h2>
+          <h2 className="section-title gradient-text-cyan">Skills & Interests</h2>
           <p className="section-subtitle">Areas I'm passionate about and actively growing in</p>
           <div className="divider-bar" />
         </div>

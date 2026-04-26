@@ -8,15 +8,15 @@ export default function Hero() {
       <div className="hero-text animate-fade-up">
         <p className="hero-greeting">👋 Hello, I'm</p>
         <h1 className="hero-name">Bhaalavishvanathan</h1>
-        <h3 className="hero-role">AI &amp; Data Science Enthusiast</h3>
+        <h3 className="hero-role">AI & Data Science Enthusiast</h3>
         <p className="hero-bio">
           Passionate about technology, continuous growth, and building solutions
-          that matter. Currently pursuing B.Tech in AI &amp; Data Science, driven by
+          that matter. Currently pursuing B.Tech in AI & Data Science, driven by
           curiosity and a never-give-up mindset.
         </p>
         <div className="hero-buttons">
           <a href="#contact" className="btn-primary">Contact Me</a>
-          <a href="#skills"  className="btn-outline">Skills &amp; Interests</a>
+          <a href="#skills"  className="btn-outline">Skills & Interests</a>
           <a
             href="/resume.pdf"
             download
