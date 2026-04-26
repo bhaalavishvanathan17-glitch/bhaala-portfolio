@@ -1,4 +1,5 @@
 import './Contact.css';
+import { supabase } from '../lib/supabaseClient';
 
 const LINKS = [
   { icon: '📧', label: 'Email Me', href: 'mailto:bhaalavishvanathan17@gmail.com', type: 'email' },
@@ -74,6 +75,9 @@ async function handleSubmit(e) {
   btn.disabled = true;
   btn.textContent = 'Sending…';
 
+  let saved = false;
+
+  // Try 1: Send to Python backend (works locally & on Vercel)
   try {
     const apiUrl = import.meta.env.VITE_API_URL || 'http://localhost:8000';
     const res = await fetch(`${apiUrl}/api/contact`, {
@@ -81,15 +85,29 @@ async function handleSubmit(e) {
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify(data),
     });
-    if (res.ok) {
-      btn.textContent = '✅ Sent!';
-      e.target.reset();
-    } else {
-      btn.textContent = '❌ Failed — try again';
-    }
+    if (res.ok) saved = true;
   } catch {
-    btn.textContent = '❌ Server unavailable';
-  } finally {
-    setTimeout(() => { btn.disabled = false; btn.textContent = '🚀 Send Message'; }, 3000);
+    console.warn('Backend unavailable — trying Supabase fallback…');
   }
+
+  // Try 2: Save directly to Supabase (works even without Python backend)
+  if (!saved && supabase) {
+    try {
+      const { error } = await supabase
+        .from('contacts')
+        .insert({ name: data.name, email: data.email, message: data.message });
+      if (!error) saved = true;
+    } catch {
+      console.warn('Supabase fallback also failed.');
+    }
+  }
+
+  if (saved) {
+    btn.textContent = '✅ Sent!';
+    e.target.reset();
+  } else {
+    btn.textContent = '❌ Failed — try again';
+  }
+
+  setTimeout(() => { btn.disabled = false; btn.textContent = '🚀 Send Message'; }, 3000);
 }
