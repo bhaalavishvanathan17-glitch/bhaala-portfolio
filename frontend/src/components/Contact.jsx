@@ -1,3 +1,4 @@
+import { useState } from 'react';
 import './Contact.css';
 import { supabase } from '../lib/supabaseClient';
 
@@ -11,6 +12,62 @@ const LINKS = [
 ];
 
 export default function Contact() {
+  const [status, setStatus] = useState('idle'); // idle | sending | sent | error
+
+  async function handleSubmit(e) {
+    e.preventDefault();
+    const data = Object.fromEntries(new FormData(e.target));
+    setStatus('sending');
+
+    let saved = false;
+
+    // ── Step 1: Save to Supabase directly (primary storage) ──
+    if (supabase) {
+      try {
+        const { error } = await supabase
+          .from('contacts')
+          .insert({ name: data.name, email: data.email, message: data.message });
+        if (!error) {
+          saved = true;
+          console.log('✅ Contact saved to Supabase');
+        } else {
+          console.warn('Supabase insert error:', error.message);
+        }
+      } catch (err) {
+        console.warn('Supabase insert failed:', err);
+      }
+    }
+
+    // ── Step 2: Ping backend to send email notification ──
+    try {
+      const apiUrl = import.meta.env.VITE_API_URL || 'http://localhost:8000';
+      const res = await fetch(`${apiUrl}/api/contact`, {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(data),
+      });
+      if (res.ok) saved = true; // count as success even if Supabase was slow
+    } catch {
+      console.warn('Backend email notification failed — data already in Supabase.');
+    }
+
+    if (saved) {
+      setStatus('sent');
+      e.target.reset();
+    } else {
+      setStatus('error');
+    }
+
+    setTimeout(() => setStatus('idle'), 4000);
+  }
+
+  const btnLabel = {
+    idle:    '🚀 Send Message',
+    sending: 'Sending…',
+    sent:    '✅ Sent!',
+    error:   '❌ Failed — try again',
+  }[status];
+
   return (
     <section className="contact-section section-pad" id="contact">
       <div className="contact-overlay" />
@@ -58,56 +115,16 @@ export default function Contact() {
               <label htmlFor="cf-message">Message</label>
               <textarea id="cf-message" name="message" rows={5} placeholder="Write your message here…" required />
             </div>
-            <button type="submit" className="btn-primary submit-btn">
-              🚀 Send Message
+            <button
+              type="submit"
+              className="btn-primary submit-btn"
+              disabled={status === 'sending'}
+            >
+              {btnLabel}
             </button>
           </form>
         </div>
       </div>
     </section>
   );
-}
-
-async function handleSubmit(e) {
-  e.preventDefault();
-  const data = Object.fromEntries(new FormData(e.target));
-  const btn = e.target.querySelector('.submit-btn');
-  btn.disabled = true;
-  btn.textContent = 'Sending…';
-
-  let saved = false;
-
-  // Try 1: Send to Python backend (works locally & on Vercel)
-  try {
-    const apiUrl = import.meta.env.VITE_API_URL || 'http://localhost:8000';
-    const res = await fetch(`${apiUrl}/api/contact`, {
-      method: 'POST',
-      headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify(data),
-    });
-    if (res.ok) saved = true;
-  } catch {
-    console.warn('Backend unavailable — trying Supabase fallback…');
-  }
-
-  // Try 2: Save directly to Supabase (works even without Python backend)
-  if (!saved && supabase) {
-    try {
-      const { error } = await supabase
-        .from('contacts')
-        .insert({ name: data.name, email: data.email, message: data.message });
-      if (!error) saved = true;
-    } catch {
-      console.warn('Supabase fallback also failed.');
-    }
-  }
-
-  if (saved) {
-    btn.textContent = '✅ Sent!';
-    e.target.reset();
-  } else {
-    btn.textContent = '❌ Failed — try again';
-  }
-
-  setTimeout(() => { btn.disabled = false; btn.textContent = '🚀 Send Message'; }, 3000);
 }

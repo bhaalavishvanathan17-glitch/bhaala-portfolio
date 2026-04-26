@@ -66,20 +66,28 @@ export default function LoginPage() {
       return;
     }
 
-    // Step 2 — Save user details to Excel via backend
+    // Step 2 — Save user details to Supabase registered_users table
+    try {
+      await supabase
+        .from('registered_users')
+        .insert({ name, email: email.toLowerCase(), phone: phone || '' });
+    } catch (err) {
+      console.warn('Registered users save failed:', err);
+    }
+
+    // Step 3 — Ping backend for owner email notification (fire & forget)
     try {
       const apiUrl = import.meta.env.VITE_API_URL || 'http://localhost:8000';
-      await fetch(`${apiUrl}/api/register-user`, {
+      fetch(`${apiUrl}/api/register-user`, {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({ name, email, phone }),
       });
     } catch {
-      // Non-blocking — Excel save failure shouldn't stop the user
-      console.warn('Excel save failed — backend may not be running.');
+      // Non-blocking
     }
 
-    // Step 3 — Auto sign-in and redirect to Home
+    // Step 4 — Auto sign-in and redirect to Home
     const { error: loginError } = await supabase.auth.signInWithPassword({ email, password });
     if (loginError) {
       showMsg('✅ Account created! Please login.', 'success');

@@ -1,6 +1,7 @@
-import { BrowserRouter, Routes, Route } from 'react-router-dom';
+import { BrowserRouter, Routes, Route, Navigate } from 'react-router-dom';
 import { ThemeProvider } from './context/ThemeContext';
 import { AuthProvider }  from './context/AuthContext';
+import ProtectedRoute from './components/ProtectedRoute';
 import Navbar      from './components/Navbar';
 import Home        from './pages/Home';
 import AboutPage   from './pages/AboutPage';
@@ -14,20 +15,24 @@ export default function App() {
       <AuthProvider>
         <BrowserRouter>
           <Routes>
-            {/* Login has its own layout (no shared Navbar) */}
+            {/* Public — Login page (no Navbar) */}
             <Route path="/login" element={<LoginPage />} />
 
-            {/* All other routes share the Navbar */}
+            {/* Protected — all other routes require login */}
             <Route path="/*" element={
-              <>
-                <Navbar />
-                <Routes>
-                  <Route path="/"        element={<Home />}        />
-                  <Route path="/about"   element={<AboutPage />}   />
-                  <Route path="/school"  element={<SchoolPage />}  />
-                  <Route path="/college" element={<CollegePage />} />
-                </Routes>
-              </>
+              <ProtectedRoute>
+                <>
+                  <Navbar />
+                  <Routes>
+                    <Route path="/"        element={<Home />}        />
+                    <Route path="/about"   element={<AboutPage />}   />
+                    <Route path="/school"  element={<SchoolPage />}  />
+                    <Route path="/college" element={<CollegePage />} />
+                    {/* Any unknown path → home */}
+                    <Route path="*"        element={<Navigate to="/" replace />} />
+                  </Routes>
+                </>
+              </ProtectedRoute>
             } />
           </Routes>
         </BrowserRouter>
